@@ -18,6 +18,36 @@
     <description>This is the Allure plugin for Atlassian Confluence.</description>
     <packaging>atlassian-plugin</packaging>
 
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>atlassian</id>-->
+<!--            <name>Atlassian</name>-->
+<!--&lt;!&ndash;            <layout>default</layout>&ndash;&gt;-->
+<!--            <url>https://packages.atlassian.com/mvn/maven-atlassian-external</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>spring</id>-->
+<!--            <name>Spring</name>-->
+<!--            &lt;!&ndash;                    <layout>default</layout>&ndash;&gt;-->
+<!--            <url>https://repo.spring.io/plugins-release/</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>central</id>-->
+<!--            <name>Maven Central</name>-->
+<!--            &lt;!&ndash;                    <layout>default</layout>&ndash;&gt;-->
+<!--            <url>https://repo1.maven.org/maven2</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

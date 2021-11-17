@@ -10,8 +10,15 @@ public class TestMacro implements Macro {
 
     @Override
     public String execute(Map<String, String> map, String s, ConversionContext conversionContext) throws MacroExecutionException {
-        return "<h1>Hello World</h1>";
-    }
+        String output = "<div class =\"testmacro\">";
+        output = output + "<div class = \"" + map.get("Color") + "\">";
+        if (map.get("Title") != null) {
+            output = output + ("<h1>Hello " + map.get("Title") + "!</h1>");
+        } else {
+            output = output + "<h1>Hello World!<h1>";
+        }
+        output = output + "</div>" + "</div>";
+        return output;    }
 
     @Override
     public BodyType getBodyType() {
