@@ -2,23 +2,33 @@
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="confluence-allure-plugin"/>
-    
+    <resource type="download" name="images/" location="/images"/>
+
     <!-- add our web resources -->
     <web-resource key="confluence-allure-plugin-resources" name="confluence-allure-plugin Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        
-        <resource type="download" name="confluence-allure-plugin.css" location="/css/confluence-allure-plugin.css"/>
-        <resource type="download" name="confluence-allure-plugin.js" location="/js/confluence-allure-plugin.js"/>
-        <resource type="download" name="images/" location="/images"/>
 
-        <context>confluence-allure-plugin</context>
+        <resource type="download" name="allure-macro.css" location="/css/allure-macro.css"/>
+        <resource type="download" name="allure-macro.js" location="/js/allure-macro.js"/>
+
+        <context>viewcontent</context>
+        <context>preview</context>
     </web-resource>
-    
+
+    <xhtml-macro name="allure-macro" key="allure-macro" class="ru.yuriian.AllureMacro"
+                 icon="/download/resources/${atlassian.plugin.key}/images/allure-logo.png">
+        <category name="external-content"/>
+        <parameters>
+            <parameter name="search" type="string" required="true"/>
+            <parameter name="placeholder" type="string" required="true"/>
+        </parameters>
+    </xhtml-macro>
+
 </atlassian-plugin>
