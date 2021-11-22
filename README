@@ -13,3 +13,13 @@ Here are the SDK commands you'll use immediately:
 Full documentation is always available at:
 
 https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK
+
+- https://developer.atlassian.com/server/confluence/writing-confluence-plugins/
+
+- https://developer.atlassian.com/server/confluence/macro-tutorials-for-confluence/
+- https://developer.atlassian.com/server/confluence/confluence-plugin-module-types/
+- https://developer.atlassian.com/server/confluence/creating-a-wikipedia-macro/
+- https://developer.atlassian.com/server/confluence/extending-the-confluence-insert-link-dialog/
+
+- https://developer.atlassian.com/server/confluence/xwork-webwork-module/
+- https://developer.atlassian.com/server/confluence/accessing-confluence-components-from-plugin-modules/
