@@ -17,18 +17,18 @@ import java.util.Optional;
 @Named
 public class AllureMacro implements Macro {
 
-    private Cache<String, Optional<AllureResponse>> cache;
+    private Cache<String, Optional<AllureTestCase>> cache;
 
     @Inject
     public AllureMacro(AllureService service, @ConfluenceImport CacheManager cacheManager) {
-        cache = cacheManager.getCache("allure-macro", service::searchByText);
+        cache = cacheManager.getCache("allure-macro", service::getTestCaseById);
     }
 
     @Override
     public String execute(Map<String, String> map, String s, ConversionContext conversionContext) throws MacroExecutionException {
-        Map context = ImmutableMap.builder().put("wiki", cache.get(map.get("search")).orElseThrow(
-                () -> new MacroExecutionException("Unable to retrieve response from Wikipedia"))).putAll(map).build();
-        return VelocityUtils.getRenderedTemplate("templates/allure-macro.vm", context);
+        Map context = ImmutableMap.builder().put("testcase", cache.get(map.get("search"))
+                        .orElseThrow(() -> new MacroExecutionException("Unable to retrieve response from Allure"))).putAll(map).build();
+        return VelocityUtils.getRenderedTemplate("templates/allure-testcase-macro.vm", context);
     }
 
     @Override

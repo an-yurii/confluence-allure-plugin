@@ -1,0 +1,4 @@
+<div>
+    <a class="wiki-search" href="$testcase.allureUrl"><em>$testcase.name</em></a>
+    <span class="wiki-desc popup" style="display: none;">$testcase.name</span>
+</div>
