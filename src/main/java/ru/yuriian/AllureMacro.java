@@ -21,12 +21,12 @@ public class AllureMacro implements Macro {
 
     @Inject
     public AllureMacro(AllureService service, @ConfluenceImport CacheManager cacheManager) {
-        cache = cacheManager.getCache("allure-macro", service::getTestCaseById);
+        cache = cacheManager.getCache("allure-macro", service::getTestCase);
     }
 
     @Override
     public String execute(Map<String, String> map, String s, ConversionContext conversionContext) throws MacroExecutionException {
-        Map context = ImmutableMap.builder().put("testcase", cache.get(map.get("search"))
+        Map context = ImmutableMap.builder().put("testcase", cache.get(map.get("allure-id"))
                         .orElseThrow(() -> new MacroExecutionException("Unable to retrieve response from Allure"))).putAll(map).build();
         return VelocityUtils.getRenderedTemplate("templates/allure-testcase-macro.vm", context);
     }

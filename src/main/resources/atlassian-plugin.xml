@@ -26,8 +26,7 @@
                  icon="/download/resources/${atlassian.plugin.key}/images/allure-logo.png">
         <category name="external-content"/>
         <parameters>
-            <parameter name="search" type="string" required="true"/>
-            <parameter name="placeholder" type="string" required="true"/>
+            <parameter name="allure-id" type="string" required="true"/>
         </parameters>
     </xhtml-macro>
 

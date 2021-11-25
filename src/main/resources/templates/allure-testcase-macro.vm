@@ -1,4 +1,8 @@
 <div>
-    <a class="wiki-search" href="$testcase.allureUrl"><em>$testcase.name</em></a>
-    <span class="wiki-desc popup" style="display: none;">$testcase.name</span>
+    $testcase.id <a class="wiki-search" href="$testcase.allureUrl"><em>$testcase.name</em></a>
+    <span class="wiki-desc popup" style="display: none;">
+        <p>$testcase.name</p>
+        <p>$testcase.customFieldsHtml</p>
+        <p>Created by: $testcase.author</p>
+    </span>
 </div>
