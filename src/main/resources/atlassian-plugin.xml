@@ -30,4 +30,115 @@
         </parameters>
     </xhtml-macro>
 
+
+    <!-- resources needed to edit image hover effects in the editor -->
+    <web-resource key="image-hover-effects-panel-resources" name="Image Hover Effects property panel resources">
+        <!-- transform Soy templates into JS -->
+        <transformation extension="soy">
+            <transformer key="soyTransformer"/>
+        </transformation>
+        <resource type="download" name="hover-effects-panel-soy.js" location="/templates/hover-effects-panel.soy"/>
+        <resource type="download" name="hover-effects-panel.js" location="/js/hover-effects-panel.js"/>
+        <!-- we need the editor resources to be loaded before these ones -->
+        <dependency>confluence.web.resources:page-editor</dependency>
+        <context>editor</context>
+    </web-resource>
+
+    <!-- resources needed to show image hover effects when viewing content -->
+    <web-resource key="image-hover-effects-page-resources" name="Image Hover Effects page resources">
+        <resource type="download" name="hover-effects.css" location="/css/hover-effects.css"/>
+        <context>viewcontent</context>
+    </web-resource>
+
+    <web-item key="image-hover-effects-panel" name="Image Hover Effects panel web-item" section="system.editor.image.properties.tabs" weight="30">
+        <description>Displays a panel for choosing image hover effects in the Image Properties dialog</description>
+        <label key="image.hover.effects.panel.title"/>
+        <link linkId="image-hover-effects"/> <!-- has to match the webItemLinkId specified in the panel JS file -->
+    </web-item>
+
+    <web-item key="link-browser-tab" name="Link Browser Tab" section="system.editor.link.browser.tabs" weight="60">
+        <description>Displays a custom tab in the Link Browser.</description>
+        <label key="link.browser.tab.name.demo"/>
+        <link linkId="demo"/><!-- has to match the 'key' specified in the panel JS file -->
+    </web-item>
+
+    <web-resource key="insert-link-javascript" name="Insert Link Dialog JavaScript">
+        <!-- transform calls to AJS.getText() inside JS files -->
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <!-- transform Soy templates into JS -->
+        <transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+
+        <!-- JavaScript resources -->
+        <resource name="demo.js" type="download" location="js/demo.js"/>
+        <resource name="demo-panel-soy.js" type="download" location="templates/demo-panel.soy"/>
+
+        <!-- we need the editor resources to be loaded before these ones -->
+        <dependency>com.atlassian.confluence.tinymceplugin:editor-javascript-resources</dependency>
+
+        <!-- these resources will be included with any page containing the editor -->
+        <context>editor</context>
+    </web-resource>
+
+    <web-resource key="insert-link-css" name="Insert Link Dialog CSS">
+        <!-- CSS resources -->
+        <resource name="demo.css" type="download" location="css/demo.css"/>
+
+        <!-- we need the editor resources to be loaded before these ones -->
+        <dependency>com.atlassian.confluence.tinymceplugin:editor-javascript-resources</dependency>
+
+        <!-- these resources will be included with any page containing the editor -->
+        <context>editor</context>
+    </web-resource>
+
+   <!-- Allure existing testcase -->
+    <web-item
+            key="allure-testcase-existing-link-browser-tab"
+            name="Allure existing testcase Link Browser Tab"
+            section="system.editor.link.browser.tabs"
+            weight="50">
+        <description>Displays a tab for allure existing testcase in the Link Browser.</description>
+        <label key="link.browser.tab.name.allure-testcase-existing"/>
+        <link linkId="allureTestCaseExisting"/><!-- has to match the 'key' specified in the panel JS file -->
+    </web-item>
+
+    <web-resource key="allure-testcase-existing-insert-link-javascript" name="Insert Link Dialog JavaScript">
+        <!-- transform calls to AJS.getText() inside JS files -->
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <!-- transform Soy templates into JS -->
+        <transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+
+        <!-- JavaScript resources -->
+        <resource name="allure-testcase-existing.js" type="download" location="testcase/existing/allure-testcase-existing.js"/>
+        <resource name="allure-testcase-existing-panel-soy.js" type="download" location="testcase/existing/allure-testcase-existing-panel.soy"/>
+
+        <!-- we need the editor resources to be loaded before these ones -->
+        <dependency>com.atlassian.confluence.tinymceplugin:editor-javascript-resources</dependency>
+
+        <!-- these resources will be included with any page containing the editor -->
+        <context>editor</context>
+    </web-resource>
+
+    <web-resource key="allure-testcase-existing-insert-link-css" name="Insert Link Dialog CSS">
+        <!-- CSS resources -->
+        <resource name="allure-testcase-existing.css" type="download" location="testcase/existing/allure-testcase-existing.css"/>
+        <!-- we need the editor resources to be loaded before these ones -->
+        <dependency>com.atlassian.confluence.tinymceplugin:editor-javascript-resources</dependency>
+        <!-- these resources will be included with any page containing the editor -->
+        <context>editor</context>
+    </web-resource>
+
 </atlassian-plugin>

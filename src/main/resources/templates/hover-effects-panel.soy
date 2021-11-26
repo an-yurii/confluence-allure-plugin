@@ -1,0 +1,32 @@
+{namespace Confluence.Templates.ImageProperties.HoverEffects}
+
+/**
+ * @param fadeSelection id of the fade option that should be selected
+ */
+{template .panel}
+    <form class="aui">
+        <fieldset class="group">
+            <legend><span>{getText('image.hover.effects.fade.label')}</span></legend>
+            <div class="radio">
+                <input class="radio" type="radio" name="fade" id="fade-none"
+                    {if not $fadeSelection} checked="checked"{/if}>
+                <label for="fade-none">{getText('image.hover.effects.fade.none')}</label>
+            </div>
+            <div class="radio">
+                <input class="radio" type="radio" name="fade" id="fade-low"
+                    {if $fadeSelection == 'fade-low'} checked="checked"{/if}>
+                <label for="fade-low">{getText('image.hover.effects.fade.low')}</label>
+            </div>
+            <div class="radio">
+                <input class="radio" type="radio" name="fade" id="fade-medium"
+                    {if $fadeSelection == 'fade-medium'} checked="checked"{/if}>
+                <label for="fade-medium">{getText('image.hover.effects.fade.medium')}</label>
+            </div>
+            <div class="radio">
+                <input class="radio" type="radio" name="fade" id="fade-high"
+                    {if $fadeSelection == 'fade-high'} checked="checked"{/if}>
+                <label for="fade-high">{getText('image.hover.effects.fade.high')}</label>
+            </div>
+        </fieldset>
+    </form>
+{/template}
