@@ -8,7 +8,7 @@
 
         const ACCESS_TOKEN = "unknown"
         var key = 'allureTestCaseExisting',    // This panel's key: must match the ID of the web-item link and panel template
-            $linkField,      // The jQueryfied link input element.
+            $idField,        // The jQueryfied link input element.
             thisPanel,       // A reference to this panel, stored when the panel is created
             tab,             // A reference to the tab
             $link,
@@ -25,7 +25,7 @@
                 console.log(Confluence)
 
                 thisPanel = context.baseElement;
-                $linkField = thisPanel.find("input[name='destination']");
+                $idField = $( "#testcase-id" )
 
                 // prevent enter submitting any forms when the button is disabled
                 thisPanel.find("form").keydown(function(e) {
@@ -42,16 +42,9 @@
 //                    }
 //                });
 
-                var idField = $( "#testcase-id" )
-                console.log("#testcase-id")
-                console.log(idField)
-                console.log("$link")
-                console.log($link)
-                idField.val("1234");
-
                 $( "#refreshButton" ).click(function() {
                     AJS.log("#refreshButton.click() called.");
-                    fetch("http://localhost:1990/confluence/rest/allure/1.0/testcase/" + $testCaseId)
+                    fetch("http://localhost:1990/confluence/rest/allure/1.0/testcase/" + $idField.val())
                         .then(response => {
                             console.log(response)
                             // indicates whether the response is successful (status code 200-299) or not
@@ -62,6 +55,17 @@
                         })
                         .then(data => {
                             console.log(data)
+
+                            var linkObj = Confluence.Link.makeExternalLink(data.url)
+                            var text = "[" + data.id + "] " + data.name;
+//                            linkObj.body.text = text;
+//                            linkObj.body.html = text;
+                            linkBrowser.setLink(linkObj); // will enable the Submit button when a URL is added
+                            aliasField = $( "#alias" );
+                            aliasField.val(text);
+
+                            console.log("--- aliasField")
+                            console.log(aliasField)
                         })
                         .catch(error => console.log(error))
                 });
@@ -71,14 +75,12 @@
             onSelect: function () {
                 // Defer focus to after dialog is shown, gets around AJS.Dialog tabindex issues
                 setTimeout(function() {
-                    $linkField.focus();
+                    $idField.focus();
                     console.log("onSelect - $link")
                     console.log($link)
                     if ($testCaseId != null) {
-                        $( "#testcase-id" ).val($testCaseId);
+                        $idField.val($testCaseId);
                     }
-//                    console.log("linkBrowser.getLinkText()")
-//                    console.log(linkBrowser.getLinkText())
                 });
             },
 

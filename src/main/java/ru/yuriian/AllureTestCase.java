@@ -56,4 +56,8 @@ public class AllureTestCase {
         }
         return result.toString();
     }
+
+    public AllureTestCaseDto toDto() {
+        return new AllureTestCaseDto(testCaseDto, testCaseCustomFieldDtos, getAllureUrl());
+    }
 }

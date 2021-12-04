@@ -32,9 +32,9 @@ public class RestProxy {
 
         Response response;
         if (testCase.isPresent()) {
-            response = Response.ok(testCase.get()).build();
+            response = Response.ok(testCase.get().toDto()).build();
         } else {
-            response = Response.serverError().build();
+            response = Response.status(Response.Status.NOT_FOUND).build();
         }
         return response;
     }
