@@ -24,7 +24,7 @@ public class AllureService {
     private static final String TESTCASE_URL = "https://allure.tinkoff.ru/api/rs/testcase/%s";
     private static final String CUSTOM_FIELDS_URL = "https://allure.tinkoff.ru/api/rs/testcase/%s/cfv";
 
-    private static final String ACCESS_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ2LmtyaXpoYW5vdnNraXkiLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiQWxsdXJlIFRlc3RPcHMiLCJleHAiOjE2Mzc4MjM0MjEsImlhdCI6MTYzNzc2NTgyMSwiY2xpZW50X2lkIjoiYWxsdXJlLWVlLWdhdGV3YXkiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiLCJST0xFX0FVRElUT1IiXSwianRpIjoiYTgxOWMxZWEtOGM2Yi00NjkzLTllYzYtNDEwY2Q2Y2FmNWRiIn0.TRTfHIghO2U8G9uXWcMiBwCCsN6hugX_hcp2nW-PAhCrgDAMppQun68jruoJ8UYThrBnZnWtB-iXqhzITGn5tMF4DdDiSG0HzgtjkBnD5HnLLjne3Bb-eMc8CnCabZEgO-95l9PJc8ixazjnbroAzmfn9u-b74Aj5sYrMkAs8npwN6ve4DUlTLtjtXgEwuRnLGCqaJ_JJFV9f-JHmJo1w_m4kAtR2yHDDODj409u4KRahX71lM3d2UpOxR3Xl04gjDsR-v7dDvTg61KCykh7GR-xrumRL8SeY1u26buUb9LXVHli-dEU897fZSGRgwjPZKA210WQKuNAedsw9VMW8w";
+    private static final String ACCESS_TOKEN = "unknown";
 
     @ConfluenceImport
     private HttpRetrievalService service;

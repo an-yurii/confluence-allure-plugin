@@ -185,4 +185,8 @@
         <context>editor</context>
     </web-resource>
 
+    <rest name="My Rest Resource" i18n-name-key="my-rest-resource.name" key="my-rest-resource" path="/allure" version="1.0">
+        <description key="my-rest-resource.description">The My Rest Resource Plugin</description>
+    </rest>
+
 </atlassian-plugin>
