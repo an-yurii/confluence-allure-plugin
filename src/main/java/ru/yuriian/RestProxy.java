@@ -23,17 +23,20 @@ import java.util.Optional;
 @Path("/testcase")
 public class RestProxy {
 
-    private static final String ACCESS_TOKEN = "undefined";
+    private static String ACCESS_TOKEN = null;
 
     private static final Logger log = LoggerFactory.getLogger(AllureService.class);
     private AllureService allureService;
+    private AllureHttpClient httpClient;
 
     @Inject
-    public RestProxy(AllureService service) {
+    public RestProxy(AllureService service, AllureHttpClient httpClient) {
         allureService = service;
+        this.httpClient = httpClient;
     }
 
     @GET
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/{key}")
     public Response getMessage(@PathParam("key") String key) {

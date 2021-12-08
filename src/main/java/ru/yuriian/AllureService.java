@@ -16,23 +16,27 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
 @Named
 public class AllureService {
-    private static final String TESTCASE_URL = "https://allure.tinkoff.ru/api/rs/testcase/%s";
-    private static final String CUSTOM_FIELDS_URL = "https://allure.tinkoff.ru/api/rs/testcase/%s/cfv";
+    private static final String TESTCASE_URL = "%s/api/rs/testcase/%s";
+    private static final String CUSTOM_FIELDS_URL = "%s/api/rs/testcase/%s/cfv";
 
-    private static final String ACCESS_TOKEN = "unknown";
+    private static final Logger log = LoggerFactory.getLogger(AllureService.class);
 
     @ConfluenceImport
     private HttpRetrievalService service;
-    private static final Logger log = LoggerFactory.getLogger(AllureService.class);
+    private AllureHttpClient allureHttpClient;
+    private AccessTokenStorage accessTokenStorage;
 
     @Inject
-    public AllureService(HttpRetrievalService service) {
+    public AllureService(HttpRetrievalService service, AllureHttpClient allureHttpClient, AccessTokenStorage accessTokenStorage) {
         this.service = service;
+        this.allureHttpClient = allureHttpClient;
+        this.accessTokenStorage = accessTokenStorage;
     }
 
     @Nonnull
@@ -50,13 +54,13 @@ public class AllureService {
     private TestCaseDto getTestCaseById(String id) {
         TestCaseDto result = null;
         try {
-            HttpRequest request = getHttpRequest(String.format(TESTCASE_URL, id));
+            HttpRequest request = getHttpRequest(String.format(TESTCASE_URL, AllureConstants.BASE_URL, id));
             HttpResponse response = service.get(request);
             log.error("Response code: " + response.getStatusCode());
 
             if (response.getStatusCode() == 200) {
                 Gson gson = new Gson();
-                result = gson.fromJson(IOUtils.toString(response.getResponse(), "UTF-8"),
+                result = gson.fromJson(IOUtils.toString(response.getResponse(), StandardCharsets.UTF_8),
                         TestCaseDto.class);
             }
         } catch (IOException e) {
@@ -68,7 +72,7 @@ public class AllureService {
     private List<TestCaseCustomFieldDto> getCustomFieldsById(String id) {
         List<TestCaseCustomFieldDto> result = null;
         try {
-            HttpRequest request = getHttpRequest(String.format(CUSTOM_FIELDS_URL, id));
+            HttpRequest request = getHttpRequest(String.format(CUSTOM_FIELDS_URL, AllureConstants.BASE_URL, id));
             HttpResponse response = service.get(request);
             log.error("Response code: " + response.getStatusCode());
 
@@ -83,10 +87,16 @@ public class AllureService {
         return result;
     }
 
-    private HttpRequest getHttpRequest(String url) {
+    private HttpRequest getHttpRequest(String url) throws IOException {
         HttpRequest request = new HttpRequest();
-        request.setHeader("Authorization", "Bearer " + ACCESS_TOKEN);
         request.setUrl(url);
+
+        log.error("---------- ACCESS_TOKEN_STORAGE Id = " + accessTokenStorage.toString());
+        String accessToken = accessTokenStorage.getAccessToken();
+        if (accessToken == null) {
+            accessToken = allureHttpClient.getAccessToken();
+        }
+        request.setHeader("Authorization", "Bearer " + accessToken);
         return request;
     }
 }

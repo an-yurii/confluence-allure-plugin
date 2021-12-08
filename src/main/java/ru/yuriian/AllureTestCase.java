@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AllureTestCase {
-    private static final String URL_TEMPLATE = "https://staging.allure.tinkoff.ru/project/%d/test-cases/%d";
+    private static final String URL_TEMPLATE = "%s/project/%d/test-cases/%d";
 
     private TestCaseDto testCaseDto;
     private List<TestCaseCustomFieldDto> testCaseCustomFieldDtos;
@@ -41,7 +41,7 @@ public class AllureTestCase {
 
     @Nonnull
     public String getAllureUrl() {
-        return String.format(URL_TEMPLATE, testCaseDto.getProjectId(), testCaseDto.getId());
+        return String.format(URL_TEMPLATE, AllureConstants.BASE_URL, testCaseDto.getProjectId(), testCaseDto.getId());
     }
 
     @Nonnull
