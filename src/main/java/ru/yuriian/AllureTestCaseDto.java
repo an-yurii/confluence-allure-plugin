@@ -10,10 +10,10 @@ import java.util.TreeMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AllureTestCaseDto {
-    private int id;
-    private int projectId;
+    private Integer id;
+    private Integer projectId;
     private String name;
-    private boolean automated;
+    private Boolean automated;
     private String createdBy;
     private String url;
     private Map<String, String> customFields;

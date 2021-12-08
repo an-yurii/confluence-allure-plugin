@@ -5,16 +5,20 @@
  */
 {template .allureTestCaseNewPanel}
     <div class="input-field">
+        <label for="testcase-id">{getText('link.browser.allure-testcase-new.id')}:</label>
+        <input type="text" tabindex="0" class="text" id="testcase-id" name="testcase-id" size="60">
+    </div>
+    <div class="input-field">
         <label for="testcase-name">{getText('link.browser.allure-testcase-new.name')}:</label>
-        <input type="text" tabindex="0" class="text" id="testcase-name" name="testcase-name" size="60">
+        <input type="text" tabindex="1" class="text" id="testcase-name" name="testcase-name" size="60">
     </div>
     <div class="input-field">
         <label for="testcase-component">{getText('link.browser.allure-testcase-new.component')}:</label>
-        <input type="text" tabindex="1" class="text" id="testcase-component" name="testcase-component" size="60">
+        <input type="text" tabindex="2" class="text" id="testcase-component" name="testcase-component" size="60">
     </div>
     <div class="input-field">
         <label for="testcase-feature">{getText('link.browser.allure-testcase-new.feature')}:</label>
-        <input type="text" tabindex="2" class="text" id="testcase-feature" name="testcase-feature" size="60">
+        <input type="text" tabindex="3" class="text" id="testcase-feature" name="testcase-feature" size="60">
     </div>
     <div class="input-field">
         <button id="createButton" class="btn create">{getText('link.browser.allure-testcase-new.create-button.title')}:</button>

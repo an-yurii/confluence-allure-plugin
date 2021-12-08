@@ -7,10 +7,15 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CustomFieldDto {
+public class LinkDto {
     private String name;
+    private String url;
 
     public String getName() {
         return name;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

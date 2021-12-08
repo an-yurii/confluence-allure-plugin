@@ -8,6 +8,7 @@
 
         var key = 'allureTestCaseNew',    // This panel's key: must match the ID of the web-item link and panel template
             $nameField,      // The jQueryfied link input element.
+            $idField,
             thisPanel,       // A reference to this panel, stored when the panel is created
             tab;             // A reference to the tab
 
@@ -21,6 +22,7 @@
 
                 thisPanel = context.baseElement;
                 $nameField = $( "#testcase-name" );
+                $idField = $( "#testcase-id" );
 //                $nameField = thisPanel.find("input[name='destination']");
 
                 // prevent enter submitting any forms when the button is disabled
@@ -41,16 +43,52 @@
 
                 $( "#createButton" ).click(function() {
                     AJS.log("#createButton.click() called.");
-                    console.log(Confluence.Link);
-                    var url = "https://allure.tinkoff.ru/project/90/test-cases/542213";
-                    var linkObj = url ? Confluence.Link.makeExternalLink(url) : null;
-                    if (linkObj) {
-                        var text = "[542213] " + $nameField.val();
-                        linkObj.body.text = text;
-                        linkObj.body.html = text;
-                        console.log(linkObj.body);
-                        linkBrowser.setLink(linkObj); // will enable the Submit button when a URL is added
+                    var testcaseName = $nameField.val()
+                    console.log(testcaseName)
+
+                    var originTestcase = {
+                        name: testcaseName,
+                        projectId: 90,
+                        links: [
+                            {
+                                name: "Confluence",
+                                url: "http://localhost:1990/confluence"
+                            }
+                        ]
                     }
+
+                    fetch("http://localhost:1990/confluence/rest/allure/1.0/testcase/", {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json'
+                            },
+                        body: JSON.stringify(originTestcase)
+                    })
+                        .then(response => {
+                            console.log(response)
+                            // indicates whether the response is successful (status code 200-299) or not
+                            if (!response.ok) {
+                                throw new Error(`Request failed with status ${reponse.status}`)
+                            }
+                            return response.json()
+                        })
+                        .then(testcase => {
+                            console.log(testcase)
+                            console.log(testcase.name)
+                            console.log($idField);
+                            var $testcaseName = testcase.name;
+                            $idField.val($testcaseName);
+
+                            var linkObj = Confluence.Link.makeExternalLink(testcase.url)
+                            var text = "[" + testcase.id + "] " + testcase.name;
+                            linkBrowser.setLink(linkObj); // will enable the Submit button when a URL is added
+                            aliasField = $( "#alias" );
+                            aliasField.val(text);
+
+                            console.log("--- aliasField")
+                            console.log(aliasField)
+                        })
+                        .catch(error => console.log(error))
                 });
             },
 

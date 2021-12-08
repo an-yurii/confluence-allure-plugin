@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AllureTestCase {
-    private static final String URL_TEMPLATE = "https://allure.tinkoff.ru/project/%d/test-cases/%d";
+    private static final String URL_TEMPLATE = "https://staging.allure.tinkoff.ru/project/%d/test-cases/%d";
 
     private TestCaseDto testCaseDto;
     private List<TestCaseCustomFieldDto> testCaseCustomFieldDtos;
