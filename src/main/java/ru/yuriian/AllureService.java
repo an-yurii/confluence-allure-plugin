@@ -51,10 +51,20 @@ public class AllureService {
         return result;
     }
 
+    public Optional<AllureTestCase> createTestCase(TestCaseDto testCaseDto) {
+        Optional<AllureTestCase> result = Optional.empty();
+        try {
+            result = allureHttpClient.createTestCase(getAccessToken(), testCaseDto);
+        } catch (IOException e) {
+            log.error("Exception during request to Allure", e);
+        }
+        return result;
+    }
+
     private TestCaseDto getTestCaseById(String id) {
         TestCaseDto result = null;
         try {
-            HttpRequest request = getHttpRequest(String.format(TESTCASE_URL, AllureConstants.BASE_URL, id));
+            HttpRequest request = createHttpRequest(String.format(TESTCASE_URL, AllureConstants.BASE_URL, id));
             HttpResponse response = service.get(request);
             log.error("Response code: " + response.getStatusCode());
 
@@ -72,7 +82,7 @@ public class AllureService {
     private List<TestCaseCustomFieldDto> getCustomFieldsById(String id) {
         List<TestCaseCustomFieldDto> result = null;
         try {
-            HttpRequest request = getHttpRequest(String.format(CUSTOM_FIELDS_URL, AllureConstants.BASE_URL, id));
+            HttpRequest request = createHttpRequest(String.format(CUSTOM_FIELDS_URL, AllureConstants.BASE_URL, id));
             HttpResponse response = service.get(request);
             log.error("Response code: " + response.getStatusCode());
 
@@ -87,16 +97,19 @@ public class AllureService {
         return result;
     }
 
-    private HttpRequest getHttpRequest(String url) throws IOException {
+    private HttpRequest createHttpRequest(String url) throws IOException {
         HttpRequest request = new HttpRequest();
         request.setUrl(url);
+        request.setHeader("Authorization", "Bearer " + getAccessToken());
+        return request;
+    }
 
+    private String getAccessToken() throws IOException {
         log.error("---------- ACCESS_TOKEN_STORAGE Id = " + accessTokenStorage.toString());
         String accessToken = accessTokenStorage.getAccessToken();
         if (accessToken == null) {
             accessToken = allureHttpClient.getAccessToken();
         }
-        request.setHeader("Authorization", "Bearer " + accessToken);
-        return request;
+        return accessToken;
     }
 }

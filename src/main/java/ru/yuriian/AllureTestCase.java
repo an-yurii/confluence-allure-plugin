@@ -1,12 +1,11 @@
 package ru.yuriian;
 
+import ru.yuriian.dto.AllureTestCaseDto;
 import ru.yuriian.dto.TestCaseCustomFieldDto;
 import ru.yuriian.dto.TestCaseDto;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AllureTestCase {
     private static final String URL_TEMPLATE = "%s/project/%d/test-cases/%d";

@@ -1,8 +1,6 @@
-package ru.yuriian;
+package ru.yuriian.dto;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import ru.yuriian.dto.TestCaseCustomFieldDto;
-import ru.yuriian.dto.TestCaseDto;
 
 import java.util.List;
 import java.util.Map;
