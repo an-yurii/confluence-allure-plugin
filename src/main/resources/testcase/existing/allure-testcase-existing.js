@@ -19,10 +19,6 @@
 
             // called when the panel is created - register event handlers here
             createPanel: function (context) {
-                console.log("createPanel: function (context)")
-                console.log(context)
-                console.log(linkBrowser)
-                console.log(Confluence)
 
                 thisPanel = context.baseElement;
                 $idField = $( "#testcase-id" )
@@ -96,7 +92,7 @@
             // Called before the dialog opens to determine which tab to highlight
             handlesLink: function (linkObj) {
                 // return true if the link should be cause this panel to be selected when editing
-                var isAllureLink = linkObj.getHref().startsWith('https://allure.tinkoff.ru');
+                var isAllureLink = linkObj.getHref().startsWith('https://staging.allure.tinkoff.ru');
                 if (isAllureLink) {
                     $link = linkObj;
                     var url = new URL($link.getHref());

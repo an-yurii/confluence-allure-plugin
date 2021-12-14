@@ -8,7 +8,6 @@
 
         var key = 'allureTestCaseNew',    // This panel's key: must match the ID of the web-item link and panel template
             $nameField,      // The jQueryfied link input element.
-            $idField,
             thisPanel,       // A reference to this panel, stored when the panel is created
             tab;             // A reference to the tab
 
@@ -17,13 +16,15 @@
 
             // called when the panel is created - register event handlers here
             createPanel: function (context) {
-                console.log("createPanel: function (context)")
+                console.log("context = ")
                 console.log(context)
+                console.log("linkBrowser = ")
+                console.log(linkBrowser)
+                console.log("Confluence = ")
+                console.log(Confluence)
 
                 thisPanel = context.baseElement;
                 $nameField = $( "#testcase-name" );
-                $idField = $( "#testcase-id" );
-//                $nameField = thisPanel.find("input[name='destination']");
 
                 // prevent enter submitting any forms when the button is disabled
                 thisPanel.find("form").keydown(function(e) {
@@ -51,8 +52,8 @@
                         projectId: 90,
                         links: [
                             {
-                                name: "Confluence",
-                                url: "http://localhost:1990/confluence"
+                                name: "Список провайдеров услуг",
+                                url: "http://localhost:1990/confluence/pages/viewpage.action?pageId=3178498"
                             }
                         ]
                     }
@@ -75,9 +76,7 @@
                         .then(testcase => {
                             console.log(testcase)
                             console.log(testcase.name)
-                            console.log($idField);
                             var $testcaseName = testcase.name;
-                            $idField.val($testcaseName);
 
                             var linkObj = Confluence.Link.makeExternalLink(testcase.url)
                             var text = "[" + testcase.id + "] " + testcase.name;
@@ -97,6 +96,9 @@
                 // Defer focus to after dialog is shown, gets around AJS.Dialog tabindex issues
                 setTimeout(function() {
                     $nameField.focus();
+                    aliasField = $( "#alias" );
+                    $nameField.val(aliasField.val());
+                    aliasField.val("");
                 });
             },
 
